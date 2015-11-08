@@ -93,7 +93,11 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
       replace: true,
       transclude: true,
       templateUrl: 'template/modal/window.html',
-      link: function (scope, element, attrs) {
+      link: function (scope, element, attrs, nullController, transclude) {
+        transclude(scope, function(clone) {
+          element.append(clone);
+        });
+
         scope.windowClass = attrs.windowClass || '';
 
         $timeout(function () {
