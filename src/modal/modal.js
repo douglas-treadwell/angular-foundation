@@ -239,6 +239,7 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
 
         if (currBackdropIndex >= 0 && !backdropDomEl) {
           backdropScope = $rootScope.$new(true);
+          backdropScope.backdropClass = modal.backdropClass;
           backdropScope.index = currBackdropIndex;
           backdropDomEl = $compile('<div modal-backdrop></div>')(backdropScope);
           parent.append(backdropDomEl);
@@ -246,7 +247,7 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
 
         // Create a faux modal div just to measure its
         // distance to top
-        var faux = angular.element('<div class="reveal-modal" style="z-index:-1""></div>');
+        var faux = angular.element('<div class="reveal-modal" style="z-index:-1"></div>');
         parent.append(faux[0]);
         cssTop = parseInt($window.getComputedStyle(faux[0]).top) || 0;
         var openAt = calculateModalTop(faux, cssTop);
@@ -398,7 +399,8 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
                 backdrop: modalOptions.backdrop,
                 keyboard: modalOptions.keyboard,
                 windowClass: modalOptions.windowClass,
-                parent: modalOptions.parent || 'body'
+                parent: modalOptions.parent || 'body',
+                backdropClass: modalOptions.backdropClass
               });
 
             }, function resolveError(reason) {
